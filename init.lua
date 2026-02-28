@@ -22,6 +22,6 @@ require("plugins")
 require("local.termux_clipboard")
 require("local.restore_cursor")
 require("local.home_or_word")
-require("local.hi_hex")
+-- require("local.hi_hex")
 require("local.note")
 

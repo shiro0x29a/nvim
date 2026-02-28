@@ -23,6 +23,29 @@ local ex_to_current_file = function()
 end
 
 vim.keymap.set('n', '<c-e>', ex_to_current_file, { desc = 'Netrw: jump to current file' })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "netrw",
+  callback = function()
+    pcall(vim.keymap.del, "n", "t", { buffer = true })
+    
+    vim.keymap.set("n", "e", function()
+      local netrw_dir = vim.b.netrw_curdir or vim.fn.getcwd()
+      
+      local filename = vim.fn.expand("<cfile>")
+      
+      if filename ~= "" and filename ~= "./" and filename ~= "../" then
+        local fullpath = netrw_dir .. "/" .. filename
+        fullpath = fullpath:gsub("//", "/")
+        
+        vim.cmd("tabedit " .. vim.fn.fnameescape(fullpath))
+      end
+    end, { buffer = true, desc = "Open in new tab" })
+    
+  end,
+})
+
+vim.keymap.set("n", "tg", "gT")
 -- NeoTree
 --vim.keymap.set('n', '<leader>E', ':Neotree float reveal<CR>')
 --vim.keymap.set('n', '<leader>e', ':Neotree left reveal<CR>')

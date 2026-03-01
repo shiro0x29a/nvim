@@ -1,3 +1,3 @@
-NVIM v0.9.5
-Build type: Release
-LuaJIT 2.1.1692716794
+NVIM v0.11.0
+Build type: Debug
+LuaJIT 2.1.1741730670

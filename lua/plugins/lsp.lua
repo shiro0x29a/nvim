@@ -128,9 +128,11 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
+      vim.lsp.config["pyright"] = { cmd = { "pyright-langserver", "--stdio" } }
+      vim.lsp.config["ts_ls"] = { cmd = { "typescript-language-server", "--stdio" } }
+      vim.lsp.config["buf_ls"] = { cmd = { "buf", "beta", "lsp" } }
       vim.lsp.config["lua_ls"] = { cmd = { "lua-language-server" } }
       vim.lsp.config["gopls"] = { cmd = { "gopls" } }
-      vim.lsp.config["ts_ls"] = { cmd = { "typescript-language-server", "--stdio" } }
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 				callback = function(ev)
